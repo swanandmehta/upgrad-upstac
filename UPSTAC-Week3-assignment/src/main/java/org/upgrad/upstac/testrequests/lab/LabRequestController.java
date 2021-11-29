@@ -72,7 +72,11 @@ public class LabRequestController {
         //Make use of the findByTester() method from testRequestQueryService class
         // For reference check the method getForTests() method from LabRequestController class
 
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented"); // replace this line with your code
+        User tester = userLoggedInService.getLoggedInUser();
+
+        return testRequestQueryService.findByTester(tester);
+
+        //throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented"); // replace this line with your code
 
 
     }
@@ -81,7 +85,6 @@ public class LabRequestController {
     @PreAuthorize("hasAnyRole('TESTER')")
     @PutMapping("/assign/{id}")
     public TestRequest assignForLabTest(@PathVariable Long id) {
-
 
 
         User tester =userLoggedInService.getLoggedInUser();
